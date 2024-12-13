@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to FIDO</title>
+</head>
+<body>
+    <h1>Welcome to FIDO</h1>
+    <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
+        <label for="file">Upload a photo of your dog:</label>
+        <input type="file" id="file" name="file" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    <!-- Section to display the results -->
+    <div id="results" style="margin-top: 20px; display: none;">
+        <h2>Results</h2>
+        <p id="breed">Error: Unable to process the request.</p>
+        <p id="confidence"></p>
+    </div>
+
+    <!-- JavaScript to handle form submission and display results -->
+    <script>
+        const form = document.getElementById('uploadForm');
+        const resultsDiv = document.getElementById('results');
+        const breedPara = document.getElementById('breed');
+        const confidencePara = document.getElementById('confidence');
+
+        form.onsubmit = async (event) => {
+            event.preventDefault(); // Prevent default form submission behavior
+
+            // Create FormData object for the uploaded file
+            const formData = new FormData(form);
+
+            try {
+                // Send the file to the server using fetch
+                const response = await fetch('/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                // Parse the response JSON
+                const result = await response.json();
+
+                console.log('Result from server:', result); // Debugging log
+
+                // Display the results on the page
+                if (result.breed && result.confidence) {
+                    breedPara.textContent = `Breed: ${result.breed}`;
+                    confidencePara.textContent = `Confidence: ${(result.confidence * 100).toFixed(2)}%`;
+                    resultsDiv.style.display = 'block'; // Show the results section
+                } else {
+                    breedPara.textContent = `Error: ${result.error || 'Something went wrong'}`;
+                    confidencePara.textContent = '';
+                    resultsDiv.style.display = 'block'; // Show the results section
+                }
+            } catch (error) {
+                console.error('Error uploading file:', error);
+                breedPara.textContent = 'Error: Unable to process the request.';
+                confidencePara.textContent = '';
+                resultsDiv.style.display = 'block'; // Show the results section
+            }
+        };
+    </script>
+</body>
+</html>

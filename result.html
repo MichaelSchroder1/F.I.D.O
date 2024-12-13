@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Segmentation Result</title>
+</head>
+<body>
+    <h1>Dog Segmentation Result</h1>
+    
+    <!-- Debugging Output -->
+    <h3>Debugging Information:</h3>
+    <p><strong>Image URL:</strong> {{ image_url }}</p>
+    <p><strong>Breed:</strong> {{ breed }}</p>
+    <p><strong>Confidence:</strong> {{ confidence }}</p>
+
+    <!-- Display the segmented image -->
+    <p>Here is the segmented image:</p>
+    <img src="{{ image_url }}" alt="Segmented Dog Image" style="max-width: 100%; height: auto;">
+
+    <!-- Display the predicted breed and confidence -->
+    <h2>Predicted Dog Breed</h2>
+    <p><strong>Breed:</strong> {{ breed }}</p>
+    <p><strong>Confidence Level:</strong> {{ (confidence * 100) | round(2) }}%</p>
+
+    <!-- Option to go back and upload another image -->
+    <br>
+    <a href="/">Upload Another Image</a>
+</body>
+</html>
