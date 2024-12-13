@@ -1,21 +1,19 @@
-###############################################
+
 READ ME  - FIDO
 Authur: Michael Schroeder
-###############################################
 
 
-###############################################
+
 GITHUB URL:   
 https://github.com/MichaelSchroder1/F.I.D.O
-###############################################
 
 
-###############################################
+
 ********ABOUT*********
 FIDO: Fetch Identifiable Dog Origins
 FIDO is an AI-powered application designed to recognize dog breeds from uploaded images.
 This guide outlines the files and folders required to run the program.
-###############################################
+
 
 
 Required Files and Folders
@@ -65,7 +63,7 @@ Legacy Files:
 Clone the repository:
 bash
 Copy code
-git clone https://github.com/yourusername/FIDO.git
+git clone https://github.com/MichaelSchroder1/F.I.D.O
 cd FIDO
 Start the Flask app:
 bash
